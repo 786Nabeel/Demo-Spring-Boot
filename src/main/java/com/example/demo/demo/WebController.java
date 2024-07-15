@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +18,10 @@ public class WebController {
     @GetMapping("/counterApp") // this is the mapping of the URL
     public String counterApp() {
         return "counterApp";
+    }
+    
+    @GetMapping("/color")
+    public String color(){
+        return "color";
     }
 }

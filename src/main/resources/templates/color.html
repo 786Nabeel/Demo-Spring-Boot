@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Change</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        color: blue;
+        background-color: azure;
+      }
+      a {
+        color: blue;
+        background-color: azure;
+        text-decoration: none;
+        padding: 5px;
+        border: 1px solid blue;
+        border-radius: 5px;
+      }
+      button {
+        margin-top: 20px;
+        color: white;
+        background-color: blue;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Change me</h1>
+
+      <a href="/counterApp">Another</a>
+      <div class="Watch">Watch</div>
+
+      <button onclick="change(this)">Change</button>
+    </div>
+    <script>
+      function change(element) {
+        element.disabled = true;
+
+        setInterval(() => {
+          const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+          document.querySelector("h1").style.color = `#${randomColor}`;
+        }, 1000);
+
+        setInterval(()=>{
+            const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+            document.querySelector("body").style.backgroundColor = `#${randomColor}`;
+            }, 1000 * 2
+        );
+      }
+    </script>
+  </body>
+</html>
