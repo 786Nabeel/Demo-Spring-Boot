@@ -21,6 +21,41 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/getStudent/{id}")
+    public Object getStudentById(@PathVariable String id) {
+        try{
+            Student student = studentService.getStudentById(id);
+            if(student == null){
+                return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+            }
+            return student;
+        }
+        catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+            return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+        }
+
+
+    }
+
+
+    @GetMapping("/getStudent")
+    public Object getSingleStudent(@RequestParam String id) {
+        try{
+
+            Student student = studentService.getStudentById(id);
+            if(student == null){
+                return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+            }
+            return student;
+        }
+        catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+            return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
     @PostMapping("/saveStudent")
     public ResponseEntity<String> saveStudent(@RequestBody Student student) {
       try{
