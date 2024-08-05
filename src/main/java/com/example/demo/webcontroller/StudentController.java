@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,6 +47,38 @@ public class StudentController {
           return new ResponseEntity<>("Students not saved", HttpStatus.BAD_REQUEST);
       }
 
+    }
+
+    @PutMapping("/updateStudent")
+    public ResponseEntity<String> updateStudent(@RequestBody Student student) {
+      try{
+          if(studentService.getStudentById(student.getId()) == null){
+              return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+          }
+
+          studentService.saveStudent(student);
+          return new ResponseEntity<>("Student updated successfully", HttpStatus.OK);
+      }
+      catch(Exception e){
+          System.out.println(e.getLocalizedMessage());
+          return new ResponseEntity<>("Student not updated", HttpStatus.BAD_REQUEST);
+      }
+    }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable String id) {
+      try{
+          if(studentService.getStudentById(id) == null){
+              return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
+          }
+
+          studentService.deleteStudent(id);
+          return new ResponseEntity<>("Student deleted successfully", HttpStatus.OK);
+      }
+      catch(Exception e){
+          System.out.println(e.getLocalizedMessage());
+          return new ResponseEntity<>("Student not deleted", HttpStatus.BAD_REQUEST);
+      }
     }
 
 
