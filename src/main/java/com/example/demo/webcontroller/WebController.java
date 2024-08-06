@@ -24,4 +24,14 @@ public class WebController {
     public String color(){
         return "color";
     }
+
+    @GetMapping("/studentForm")
+    public String studentForm(){
+        return "studentForm";
+    }
+
+    @GetMapping("/studentData")
+    public String studentData(){
+        return "studentData";
+    }
 }

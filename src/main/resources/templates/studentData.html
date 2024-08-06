@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Table</title>
+</head>
+<body>
+<h1>Student Data</h1>
+<table id="studentTable" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Data will be populated here -->
+    </tbody>
+</table>
+
+ </script>
+<script>
+    const url= "/getAllStudents"
+    // // Fetch API
+    // fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => populateTable(data))
+    //     .catch(error => console.error('Error:', error));
+
+    // AJAX
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('GET', url, true);
+    // xhr.onload = function() {
+    //     if (this.status === 200) {
+    //         console.log("The result is successfull")
+    //         const data = JSON.parse(this.responseText);
+    //         console.log(this.responseText)
+    //         populateTable(data);
+    //     }
+    // };
+    // xhr.send();
+
+    // Axios
+    axios.get(url)
+        .then(response => populateTable(response.data))
+        .catch(error => console.error('Error:', error));
+
+    // Function to populate table
+    function populateTable(data) {
+        console.log("The resonse is following \n",data)
+        const tableBody = document.querySelector('#studentTable tbody');
+        data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+
+                `;
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+</body>
+</html>
