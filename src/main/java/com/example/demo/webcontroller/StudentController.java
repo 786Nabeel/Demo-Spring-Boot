@@ -2,6 +2,7 @@ package com.example.demo.webcontroller;
 
 import com.example.demo.entities.Student;
 import com.example.demo.services.StudentService;
+import com.example.demo.urlmapping.StudentUrlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class StudentController {
     private StudentService studentService;
 
     @CrossOrigin(origins = "http://127.0.0.1:5500") // Replace with your frontend URL
-    @GetMapping("/getAllStudents")
+    @GetMapping(StudentUrlMapping.GET_ALL_STUDENTS)
     public List<Student> getAllStudent() {
         return studentService.getAllStudents();
     }
@@ -39,7 +40,7 @@ public class StudentController {
     }
 
 
-    @GetMapping("/getStudent")
+    @GetMapping(StudentUrlMapping.GET_SINGLE_STUDENT)
     public Object getSingleStudent(@RequestParam String id) {
         try{
 
